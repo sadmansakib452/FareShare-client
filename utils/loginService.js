@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 const loginService = ({ email, password }) => {
   return toast.promise(
     axios
-      .post("http://103.147.106.150:5000/api/v1/auth/login", {
+      .post("http://localhost:5000/api/v1/auth/login", {
         email,
         password,
       })

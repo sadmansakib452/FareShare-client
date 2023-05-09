@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 const registerService = (data) => {
 
   return toast.promise(
-    axios.post("http://103.147.106.150:5000/api/v1/auth/register", {
+    axios.post("http://localhost:5000/api/v1/auth/register", {
         name: `${data.firstName} ${data.lastName}`,
         email: data.email,
         password: data.password,
