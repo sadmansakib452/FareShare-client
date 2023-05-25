@@ -5,7 +5,7 @@ import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../App";
 import tokenService from "../../../utils/tokenService.js";
-
+import FlayoutMenus from '../FlayoutMenus/FlayoutMenus'
 const navigation = [
   { name: "Product", href: "/product" },
   { name: "Service", href: "/service" },
@@ -70,25 +70,22 @@ export default function Example() {
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             {
-              loggedInUser && <Link
-              to="/profile"
-              className="mx-3 block rounded-lg px-3 py-2.5 text-xl font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-            >
-              <span className="sr-only">Profile</span>
-              <span>{loggedInUser ? loggedInUser.name : ""}</span>
-            </Link>
+              loggedInUser && 
+              
+            //   <Link
+            //   to="/profile"
+            //   className="mx-3 block rounded-lg px-3 py-2.5 text-xl font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+            // >
+            //   <span className="sr-only">Profile</span>
+            //   <span>{loggedInUser ? loggedInUser.name : ""}</span>
+            // </Link>
+            <FlayoutMenus profileName ={loggedInUser.name} roles = {loggedInUser.roles} logout={handleSignOut}/>
+            
             }
             
-            {loggedInUser ? (
-              <button
-                onClick={handleSignOut}
-                className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-              >
-                Log out
-              </button>
-            ) : (
+            {!loggedInUser && (
               <Link
-                to="/signIn"
+                to='/signIn'
                 className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
               >
                 Log in
@@ -144,7 +141,30 @@ export default function Example() {
                   >
                     <span className="sr-only">Profile</span>
                     <span>{loggedInUser ? loggedInUser.name : ""}</span>
+                   
                   </Link>
+
+            
+                  }
+                  {
+                   
+                   loggedInUser &&  (loggedInUser.roles === 'USER' || loggedInUser.roles === 'ADMIN'  ? (
+
+                    <Link to='/searchRide'
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
+                    <span>Ride Now</span>
+                    </Link>
+                  ): (
+                    <Link to='/driverStatus'
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
+                    <span>Driver Status</span>
+                    </Link>
+                  ))
+                  
+
+                    
                   }
                   
                   {loggedInUser ? (
